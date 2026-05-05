@@ -45,9 +45,7 @@ function App() {
       <aside className="side-nav" aria-label="Main navigation">
         <div className="profile-nav">
           <div className="avatar avatar-placeholder profile-picture">
-            <div>
-              <span>KS</span>
-            </div>
+            <div></div>
           </div>
           <nav className="menu nav-list">
             {navItems.map((item) => (
