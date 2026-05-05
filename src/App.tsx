@@ -1,122 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import "./App.css";
+import { type JobEntry } from "./types/Job";
+import { JobCard } from "./components/JobCard";
+
+const jobEntries: JobEntry[] = [
+  {
+    id: 1,
+    title: "Frontend Engineer",
+    company: "Northstar Labs",
+    location: "Remote",
+    status: "Saved",
+  },
+  {
+    id: 2,
+    title: "React Developer",
+    company: "Harbour Tech",
+    location: "Manchester",
+    status: "Applied",
+  },
+  {
+    id: 3,
+    title: "Product Engineer",
+    company: "Greenfield Systems",
+    location: "London",
+    status: "Interview",
+  },
+  {
+    id: 4,
+    title: "UI Engineer",
+    company: "Atlas Works",
+    location: "Hybrid",
+    status: "Saved",
+  },
+];
+
+const navItems = ["Home", "Applications", "Misc"];
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="app-shell">
+      <header className="site-header">
+        <p>Job Scraper</p>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <aside className="side-nav" aria-label="Main navigation">
+        <div className="profile-nav">
+          <div className="avatar avatar-placeholder profile-picture">
+            <div>
+              <span>KS</span>
+            </div>
+          </div>
+          <nav className="menu nav-list">
+            {navItems.map((item) => (
+              <button
+                className={
+                  item === "Home"
+                    ? "btn btn-neutral btn-sm nav-button"
+                    : "btn btn-outline btn-sm nav-button"
+                }
+                key={item}
+                type="button"
+              >
+                {item}
+              </button>
+            ))}
+          </nav>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+      </aside>
+
+      <section className="job-panel" aria-labelledby="jobs-title">
+        <header className="section-heading">
+          <h2 id="jobs-title">Job entries</h2>
+          <span>{jobEntries.length} temporary records</span>
+        </header>
+
+        <div className="job-list">
+          {jobEntries.map((job) => (
+            <JobCard job={job} key={job.id} />
+          ))}
         </div>
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    </main>
+  );
 }
 
-export default App
+export default App;
